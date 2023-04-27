@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <title>Weatherio</title>
+  </head>
+  <body>
+    <h1>Weatherio</h1>
+    <form action="/" method="post">
+        <input type="text" name= "city" placeholder="Enter a city name...">
+        <div id="search-results-container">
+            <ul id="search-results"></ul>
+        </div>
+      <button type="submit">Get weather</button>
+    </form>
+    {% if temperature %}
+      <h2>Current weather in {{ city }}</h2>
+      <p><img src="http://openweathermap.org/img/w/{{ icon }}.png" alt="{{ description }}"></p>
+      <p>Temperature: {{ temperature }}&deg;C</p>
+      <p>Pressure: {{ pressure }} hPa</p>
+      <p>Humidity: {{ humidity }}%</p>
+      <p>Visibility: {{ visibility }} meters</p>
+      <p>Wind speed: {{ wind_speed }} m/s</p>
+      <p>Wind direction: {{ wind_direction }}&deg;</p>
+      <p>Weather description: {{ description }}</p>
+    {% endif %}
+  </body>
+</html>
