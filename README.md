@@ -1,7 +1,7 @@
 # weatherio-flask-app
 
 ## Overview
-**Weatherio** is a weather web-app where you search for any city around the world
+==Weatherio== is a weather web-app where you search for any city around the world
 and it fetches the weather details for you. It also shows the current time
 of the city.
 
