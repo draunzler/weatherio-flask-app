@@ -1,4 +1,4 @@
-# weather-flask-app
+# weatherio-flask-app
 
 Download the code and run it on any IDE.
 
