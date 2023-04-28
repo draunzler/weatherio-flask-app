@@ -1,6 +1,8 @@
 from flask import Flask, render_template, request
 import requests
 import json
+from datetime import datetime
+import pytz
 
 app = Flask(__name__)
 
@@ -22,7 +24,7 @@ def index():
         if 'main' not in data:
             return render_template('error.html', message='No weather information found')
         
-        temperature = round(data['main']['temp'] - 273.15, 2) # Temperature in Celsius
+        temperature = round(data['main']['temp'] - 273.15) # Temperature in Celsius
         pressure = data['main']['pressure'] # Atmospheric pressure
         humidity = data['main']['humidity'] # Humidity
         visibility = data.get('visibility', 'N/A') # Visibility in meters
@@ -30,6 +32,12 @@ def index():
         wind_direction = data['wind'].get('deg', 'N/A') # Wind direction in degrees
         description = data['weather'][0]['description'] # Weather description
         icon = data['weather'][0]['icon'] # Weather icon code
+        
+        # Get current date and time of the city
+        timezone = data['timezone']
+        city_time = datetime.now(pytz.utc).astimezone(pytz.timezone(pytz.country_timezones[data['sys']['country']][0]))
+        city_date = city_time.strftime('%A, %d %b \'%y')
+        city_time = city_time.strftime('%H:%M')
         
         return render_template('index.html', 
                                city=city,
@@ -40,7 +48,9 @@ def index():
                                wind_speed=wind_speed, 
                                wind_direction=wind_direction, 
                                description=description, 
-                               icon=icon)
+                               icon=icon,
+                               city_time=city_time,
+                               city_date=city_date)
     else:
         return render_template('index.html')
 

@@ -3,26 +3,155 @@
   <head>
     <meta charset="UTF-8">
     <title>Weatherio</title>
+    <link rel="shortcut icon" type="image/png" href="{{ url_for('static', filename='images/favicon.png') }}">
+    <style>
+      *{
+        box-sizing: border-box;
+        overflow: hidden;
+        font-family: 'Gilroy', sans-serif;
+        color: rgba(255, 255, 255, 0.9);
+      }
+      html, body{
+        height: 100%;
+      }
+      body{
+        background: url("{{ url_for('static', filename='images/background.jpg') }}")no-repeat;
+        background-size: cover;
+      }
+      .video-container{
+			  position: fixed;
+			  top: 0;
+			  left: 0;
+			  width: 100%;
+			  height: 100%;
+			  overflow: hidden;
+			  z-index: -1;
+		  }
+		  .video-container video{
+			  min-width: 100%;
+			  min-height: 100%;
+			  object-fit: cover;
+		  }
+      h1{
+        font-weight: 400;
+        margin: 50px;
+      }
+      .search-button{
+		  	padding: 10px 20px;
+		  	border: none;
+        font-size: 1.1em;
+		  	background-color: #191919;
+		  	color: #fff;
+		  	cursor: pointer;
+        transition: all .4s;
+		  }
+      .search-button:hover{
+        background-color: white;
+        color: #191919;
+      }
+      form{
+        display: flex;
+        justify-content: flex-end;
+        margin: 50px;
+        margin-top: -80px;
+        color: rgba(255, 255, 255, 0.7);
+      }
+      input{
+        border: none;
+        outline: none;
+        font-size: 1.2em;
+        background: transparent;
+        border-bottom: 2px solid rgba(255, 255, 255, 0.7);
+        width: 300px;
+      }
+      input::placeholder{
+        color: rgba(255, 255, 255, 0.7);
+      }
+      .temperature-wrapper{
+        position: fixed;
+        bottom: 0;
+        left: 0;
+        margin-bottom: -90px;
+        margin-left: 80px;
+        display: flex;
+        align-items: center;
+        justify-content: flex-start;
+        padding: 10px;
+        font-size: 1.2em;
+      }
+      .temperature{
+        font-size: 150px;
+        margin-right: 10px;
+      }
+      .city-details{
+        margin-top: 0;
+        height: 120px;
+      }
+      .city-details p{
+        margin: 5px;
+      }
+      .city{
+        font-size: 60px;
+      }
+      .weather-type{
+        display: flex;
+        flex-direction: column;
+        margin-left: 10px;
+      }
+      .weather-type p:first-child{
+        margin-bottom: -35px;
+      }
+      .weather-details{
+        position: fixed;
+        bottom: 0;
+        right: 0;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        height: 200px;
+        width: 300px;
+        padding: 10px;
+        font-size: 1.2em;
+        text-align: left;
+        margin: 80px;
+        border-radius: 20px;
+        backdrop-filter: blur(7px);
+        /*filter: brightness(110%);*/
+        border: 2px solid rgba(255,255,255,0.1);
+      }
+      .weather-details p{
+        margin: 0;
+        margin-left: 10px;
+        padding: 6px 0;
+      }
+    </style>
   </head>
   <body>
     <h1>Weatherio</h1>
     <form action="/" method="post">
-        <input type="text" name= "city" placeholder="Enter a city name...">
-        <div id="search-results-container">
-            <ul id="search-results"></ul>
-        </div>
-      <button type="submit">Get weather</button>
+        <input type="text" name= "city" class="search-bar" placeholder="Enter a city name...">
+        <button type="submit" class="search-button">Search
+        </button>
     </form>
     {% if temperature %}
-      <h2>Current weather in {{ city }}</h2>
-      <p><img src="http://openweathermap.org/img/w/{{ icon }}.png" alt="{{ description }}"></p>
-      <p>Temperature: {{ temperature }}&deg;C</p>
-      <p>Pressure: {{ pressure }} hPa</p>
-      <p>Humidity: {{ humidity }}%</p>
-      <p>Visibility: {{ visibility }} meters</p>
-      <p>Wind speed: {{ wind_speed }} m/s</p>
-      <p>Wind direction: {{ wind_direction }}&deg;</p>
-      <p>Weather description: {{ description }}</p>
+    <div class="temperature-wrapper">
+      <p class="temperature">{{ temperature }}&deg;C</p>
+      <div class="city-details">
+        <p class="city">{{ city.title() }}</p>
+        <p id="city-time">{{ city_time }} - {{ city_date }}</p>
+      </div>
+      <div class="weather-type">
+        <p><img src="http://openweathermap.org/img/w/{{ icon }}.png" alt="{{ description }}"></p>
+        <p class="weather-desc">{{ description }}</p>
+      </div>
+    </div>
+    <div class="weather-details">
+      <p>Pressure&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{ pressure }} hPa</p>
+      <p>Humidity&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{ humidity }}%</p>
+      <p>Visibility&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{ visibility }} meters</p>
+      <p>Wind speed&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{ wind_speed }} m/s</p>
+      <p>Wind direction&nbsp;&nbsp;&nbsp;{{ wind_direction }}&deg;</p>
+    </div>
     {% endif %}
   </body>
 </html>
