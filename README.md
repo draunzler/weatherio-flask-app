@@ -1,5 +1,11 @@
 # weatherio-flask-app
 
+## Overview
+This is a weather web-app where you search for any city around the world
+and it fetches the weather details for you. It also shows the current time
+of the city.
+
+## Instructions
 Download the code and run it on any IDE.
 
 You CANNOT just open a live server using the `index.html` as
