@@ -91,11 +91,11 @@
         position: fixed;
         bottom: 0;
         right: 0;
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        height: 200px;
-        width: 300px;
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 20px;
+        height: max-content;
+        width: max-content;
         padding: 10px;
         font-size: 1.2em;
         text-align: left;
@@ -132,11 +132,20 @@
       </div>
     </div>
     <div class="weather-details">
-      <p>Pressure&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{ pressure }} hPa</p>
-      <p>Humidity&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{ humidity }}%</p>
-      <p>Visibility&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{ visibility }} meters</p>
-      <p>Wind speed&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{ wind_speed }} m/s</p>
-      <p>Wind direction&nbsp;&nbsp;&nbsp;{{ wind_direction }}&deg;</p>
+      <div>
+        <p>Pressure</p>
+        <p>Humidity</p>
+        <p>Visibility</p>
+        <p>Wind Speed</p>
+        <p>Wind Direction</p>
+      </div>
+      <div>
+        <p>{{ pressure }} hPa</p>
+        <p>{{ humidity }}%</p>
+        <p>{{ visibility }} meters</p>
+        <p>{{ wind_speed }} m/s</p>
+        <p>{{ wind_direction }}&deg;</p>
+      </div>
     </div>
     {% endif %}
   </body>

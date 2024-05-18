@@ -2,10 +2,87 @@
 <html>
   <head>
     <meta charset="UTF-8">
-    <title>Weather App Error</title>
+    <title>Weatherio</title>
+    <link rel="shortcut icon" type="image/png" href="{{ url_for('static', filename='images/favicon.png') }}">
+    <style>
+      *{
+        box-sizing: border-box;
+        overflow: hidden;
+        font-family: 'Gilroy', sans-serif;
+        color: rgba(255, 255, 255, 0.9);
+      }
+      html, body{
+        height: 100%;
+      }
+      body{
+        background: url("{{ url_for('static', filename='images/background.jpg') }}")no-repeat;
+        background-size: cover;
+      }
+      h1{
+        font-weight: 400;
+        margin: 50px;
+      }
+      .search-button{
+		  	padding: 10px 20px;
+		  	border: none;
+        font-size: 1.1em;
+		  	background-color: #191919;
+		  	color: #fff;
+		  	cursor: pointer;
+        transition: all .4s;
+		  }
+      .search-button:hover{
+        background-color: white;
+        color: #191919;
+      }
+      form{
+        display: flex;
+        justify-content: flex-end;
+        margin: 50px;
+        margin-top: -80px;
+        color: rgba(255, 255, 255, 0.7);
+      }
+      input{
+        border: none;
+        outline: none;
+        font-size: 1.2em;
+        background: transparent;
+        border-bottom: 2px solid rgba(255, 255, 255, 0.7);
+        width: 300px;
+      }
+      input::placeholder{
+        color: rgba(255, 255, 255, 0.7);
+      }
+      .error-message{
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+      }
+      .error-message p{
+        font-size: 48px;
+        font-weight: 600;
+        margin-bottom: -50px;
+      }
+      .error-message svg{
+        height: 300px;
+        width: 300px;
+      }
+    </style>
   </head>
   <body>
-    <h1>Error</h1>
-    <p>{{ message }}</p>
+    <h1>Weatherio</h1>
+    <form action="/" method="post">
+        <input type="text" name= "city" class="search-bar" placeholder="Enter a city name...">
+        <button type="submit" class="search-button">Search
+        </button>
+    </form>
+    {% if message %}
+    <div class="error-message">
+      <p>Sorry couldn't find your city</p>
+      <svg width="90" height="51" viewBox="0 0 90 51" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path fill-rule="evenodd" clip-rule="evenodd" d="M84.9619 5.11523C88.3203 8.55176 90 12.6328 90 17.3574C89.9727 22.1641 88.2803 26.2852 84.9219 29.7217C81.4824 33.0781 77.3574 34.7559 72.5479 34.7559H72.5273C71.543 34.7549 70.5693 34.6875 69.6055 34.5547H69.6465C66.0723 33.9365 62.9287 32.3262 60.2148 29.7217C60.2148 29.6943 60.2021 29.6816 60.1748 29.6816C57.0439 26.3477 55.4189 22.4287 55.2979 17.9219C55.2969 17.707 55.2969 17.4922 55.2979 17.2773C55.2979 15.6396 55.499 14.0957 55.9023 12.6455C56.6279 9.82617 58.1191 7.30273 60.377 5.07422C63.7891 1.69141 67.8994 0 72.71 0C77.4648 0.0273438 81.5498 1.71875 84.9619 5.07422V5.11523ZM33.332 7.93359C37.0137 7.93359 40.3848 9.03418 43.4482 11.2363C46.4307 13.4648 48.6201 16.3643 50.0176 19.9355C50.8037 19.4238 51.624 19.001 52.4766 18.666C52.748 23.6387 54.6426 27.9678 58.1602 31.6543L58.2002 31.6953C61.3164 34.8086 64.9707 36.7158 69.1621 37.4131H69.2021C70.1729 37.5342 71.1738 37.6016 72.2061 37.6152C71.6289 40.626 70.2783 43.2705 68.1543 45.5488C65.1719 48.7168 61.5859 50.3008 57.3936 50.3008H7.6582C5.56152 50.3008 3.77539 49.5215 2.29688 47.9648C0.765625 46.3545 0 44.4209 0 42.166C0 40.2588 0.604492 38.501 1.81348 36.8906C2.96875 35.3867 4.43359 34.4736 6.20703 34.1514L6.12598 32.3789C6.12598 29.3457 7.10645 26.7275 9.06836 24.5264C10.9766 22.3516 13.3408 21.1973 16.1621 21.0625C17.4785 17.1973 19.6689 14.0547 22.7314 11.6387C25.9023 9.16895 29.4355 7.93359 33.332 7.93359ZM69.7266 3.9873V21.3047H75.5713V3.9873H69.7266ZM75.6113 25.0898H69.7666V30.7285H75.6113V25.0898Z" fill="white"/>
+      </svg>
+    </div>
+    {% endif %}
   </body>
 </html>
