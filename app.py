@@ -3,7 +3,10 @@ import requests
 import json
 from datetime import datetime
 import pytz
+import os
 from geoip2.database import Reader
+
+load_dotenv()
 
 app = Flask(__name__)
 
@@ -26,7 +29,7 @@ def index():
         # Handle the case where city is None
         return render_template('error.html', message='City not found')
     
-    api_key = 'a75eed3712abd05ea47237419c17a123'
+    api_key = os.getenv('OPENWEATHER_API')
     url = f'http://api.openweathermap.org/data/2.5/weather?q={city}&appid={api_key}'
     response = requests.get(url)
     data = json.loads(response.text)
