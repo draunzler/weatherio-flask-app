@@ -4,6 +4,7 @@ import json
 from datetime import datetime
 import pytz
 import os
+from dotenv import load_dotenv
 from geoip2.database import Reader
 
 load_dotenv()
