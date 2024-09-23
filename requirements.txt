@@ -3,4 +3,4 @@ requests
 geoip2
 pytz
 gunicorn
-python-dotenv==1.0.1
+python-dotenv
