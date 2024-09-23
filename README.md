@@ -6,6 +6,6 @@ and it fetches the weather details for you. It also shows the current time
 of the city.
 
 ## Visit Site
-Visit the site [here](http://draunzler.pythonanywhere.com/).
+Visit the site [here](https://weatherio-flask-app.onrender.com/).
 
 NOTE : *the website available only till October, 6*
